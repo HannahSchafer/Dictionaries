@@ -152,8 +152,34 @@ def translate_to_pirate_talk(phrase):
 #         >>> translate_to_pirate_talk("my student is not a man!")
 #         'me swabbie be not a man!'
 #     """
+    # make dictionary of english word as key and pirate word as value
+    pirate_dict = { "sir" : "matey",
+                    "hotel" : "fleabag inn",
+                    "student" : "swabbie",
+                    "man" : "matey",
+                    "professor" :"foul blaggart",
+                    "restaurant" : "galley",
+                    "your" : "yer",
+                    "excuse" : "arr",
+                    "students" : "swabbies",
+                    "are" : "be",
+                    "restroom" : "head",
+                    "my" : "me",
+                    "is" : "be"
+                   }
 
-#     return ""
+    # split phrase into a list of words
+    words = phrase.split(" ")
+
+    # make for loop to change english word if in dictionary key to pirate word
+    for word in words:
+        if word in pirate_dict.keys():
+            words[words.index(word)] = pirate_dict[word]
+
+    # turn list of words back into a string
+    translation = str(words)
+    
+    return translation
 
 
 # def kids_game(names):
