@@ -178,74 +178,124 @@ def translate_to_pirate_talk(phrase):
 
     # turn list of words back into a string
     translation = str(words)
-    
+
     return translation
 
 
-# def kids_game(names):
-#     """Play a kids' word chain game.
+def kids_game(names):
+    """Play a kids' word chain game.
 
-#     Given a list of names, like::
+    Given a list of names, like::
 
-#       bagon baltoy yamask starly nosepass kalob nicky
+      bagon baltoy yamask starly nosepass kalob nicky
 
-#     Do the following:
+    Do the following:
 
-#     1. Always start with the first word ("bagon", in this example).
+    1. Always start with the first word ("bagon", in this example).
 
-#     2. Add it to the results.
+    2. Add it to the results.
 
-#     3. Use the last letter of that word to look for the next word.
-#        Since "bagon" ends with n, find the *first* word starting
-#        with "n" in our list --- in this case, "nosepass".
+    3. Use the last letter of that word to look for the next word.
+       Since "bagon" ends with n, find the *first* word starting
+       with "n" in our list --- in this case, "nosepass".
 
-#     4. Add "nosepass" to the results, and continue. Once a word has
-#        been used, it can't be used again --- so we'll never get to
-#        use "bagon" or "nosepass" a second time.
+    4. Add "nosepass" to the results, and continue. Once a word has
+       been used, it can't be used again --- so we'll never get to
+       use "bagon" or "nosepass" a second time.
 
-#     5. When you can't find an unused word to use, you're done!
-#        Return the list of output words.
+    5. When you can't find an unused word to use, you're done!
+       Return the list of output words.
 
-#     For example::
+    For example::
 
-#         >>> kids_game(["bagon", "baltoy", "yamask", "starly",
-#         ...            "nosepass", "kalob", "nicky", "booger"])
-#         ['bagon', 'nosepass', 'starly', 'yamask', 'kalob', 'baltoy']
+        >>> kids_game(["bagon", "baltoy", "yamask", "starly",
+        ...            "nosepass", "kalob", "nicky", "booger"])
+        ['bagon', 'nosepass', 'starly', 'yamask', 'kalob', 'baltoy']
 
-#     (After "baltoy", there are no more y-words, so we end, even
-#     though "nicky" and "booger" weren't used.)
+    (After "baltoy", there are no more y-words, so we end, even
+    though "nicky" and "booger" weren't used.)
 
-#     Two more examples:
+    Two more examples:
 
-#         >>> kids_game(["apple", "berry", "cherry"])
-#         ['apple']
+        >>> kids_game(["apple", "berry", "cherry"])
+        ['apple']
 
-#         >>> kids_game(["noon", "naan", "nun"])
-#         ['noon', 'naan', 'nun']
+        >>> kids_game(["noon", "naan", "nun"])
+        ['noon', 'naan', 'nun']
 
-#     This is a tricky problem. In particular, think about how using
-#     a dictionary (with the super-fast lookup they provide) can help;
-#     good solutions here will definitely require a dictionary.
-#     """
+    This is a tricky problem. In particular, think about how using
+    a dictionary (with the super-fast lookup they provide) can help;
+    good solutions here will definitely require a dictionary.
+    """
 
-#     return []
+    game_output = []
+    # make empty dictionary to hold keys and values
+    game_dict = {}
+
+    # adding all words to dictionary as keys
+    for word in names:
+        game_dict[word] = None
+
+    # adding values to dictionary keys. values are possibilities of what can
+    # follow the key word
+    for word in names:
+        for key in game_dict.keys():
+            if word[-1] == key[0]:
+                game_dict[key] = [word]
+
+
+    # slice off anything more than 1 value, since the key word will only be used once
+    for value in game_dict.values():
+        if value != None and len(value) > 1:
+            value[:1]
+
+
+names = ["hello", "ollie", "barbara", "apple", "alfred"]
+
+print kids_game(names)
+
+    # add first word to the game output list
+    first_name = names[0]
+    game_output.append(first_name)
+    print game_output
+
+    index = 0
+
+    while True:
+        if game_dict[game_output[index]] == None:
+            break
+        else: 
+            for item in game_dict[game_output[index]]:
+            game_output.append(game_dict[game_output[index]])
+            index += 1
+
+    return game_output
+
+
+
+
+
+#     dict:
+# key will be all the words
+# values will be all the list of possibilites of what could come after them
+
 
 #####################################################################
-# You can ignore everything below this.
+# # You can ignore everything below this.
 
-def print_dict(d):
-    # This method is used to print dictionaries in key-alphabetical
-    # order, and is only for our doctests. You can ignore it.
-    if isinstance(d, dict):
-        print "{" + ", ".join(
-            "%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
-    else:
-        print d
+# def print_dict(d):
+#     # This method is used to print dictionaries in key-alphabetical
+#     # order, and is only for our doctests. You can ignore it.
+#     if isinstance(d, dict):
+#         print "{" + ", ".join(
+#             "%r: %r" % (k, d[k]) for k in sorted(d)) + "}"
+#     else:
+#         print d
 
 
-if __name__ == "__main__":
-    print
-    import doctest
-    if doctest.testmod().failed == 0:
-        print "*** ALL TESTS PASSED ***"
-    print
+# if __name__ == "__main__":
+#     print
+#     import doctest
+#     if doctest.testmod().failed == 0:
+#         print "*** ALL TESTS PASSED ***"
+#     print
