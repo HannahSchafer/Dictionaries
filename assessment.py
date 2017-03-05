@@ -79,26 +79,35 @@ def get_melon_price(melon_name):
  
 
 
-# def word_length_sorted(words):
-#     """Return list of word-lengths and words.
+def word_length_sorted(words):
+    """Return list of word-lengths and words.
 
-#     Given a list of words, return a list of tuples, ordered by
-#     word-length. Each tuple should have two items --- a number that
-#     is a word-length, and the list of words of that word length.
+    Given a list of words, return a list of tuples, ordered by
+    word-length. Each tuple should have two items --- a number that
+    is a word-length, and the list of words of that word length.
 
-#     In addition to ordering the list by word length, order each
-#     sub-list of words alphabetically.
+    In addition to ordering the list by word length, order each
+    sub-list of words alphabetically.
 
-#     For example::
+    For example::
 
-#         >>> word_length_sorted(["ok", "an", "apple", "a", "day"])
-#         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
+        >>> word_length_sorted(["ok", "an", "apple", "a", "day"])
+        [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
 
-#         >>> word_length_sorted(["porcupine", "ok"])
-#         [(2, ['ok']), (9, ['porcupine'])]
-#     """
+        >>> word_length_sorted(["porcupine", "ok"])
+        [(2, ['ok']), (9, ['porcupine'])]
+    """
 
-#     return []
+    word_dict = {}
+
+    #iterate over each words in the list 'words'
+    for word in words:
+        if len(word) in word_dict.keys():
+            word_dict[len(word)].append(word)
+        else:    
+            word_dict[len(word)] = [word]     
+        
+    return word_dict.items()
 
 
 # def translate_to_pirate_talk(phrase):
