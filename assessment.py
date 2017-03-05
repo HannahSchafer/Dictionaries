@@ -240,47 +240,35 @@ def kids_game(names):
     # follow the key word
     for word in names:
         for key in game_dict.keys():
-            if word[-1] == key[0]:
-                game_dict[key] = [word]
+            if word in game_dict.values():
+                pass
+            elif key[-1] == word[0]:
+                game_dict[key] = word
+                #need to make it so it adds all possibilites
 
-
-    # slice off anything more than 1 value, since the key word will only be used once
-    for value in game_dict.values():
-        if value != None and len(value) > 1:
-            value[:1]
-
-
-names = ["hello", "ollie", "barbara", "apple", "alfred"]
-
-print kids_game(names)
+    print game_dict
 
     # add first word to the game output list
     first_name = names[0]
     game_output.append(first_name)
+
     print game_output
 
     index = 0
-
     while True:
         if game_dict[game_output[index]] == None:
             break
         else: 
-            for item in game_dict[game_output[index]]:
             game_output.append(game_dict[game_output[index]])
             index += 1
 
-    return game_output
+    print game_output
+#     # return game_output
+names = ["hello", "ollie", "barbara", "apple", "alfred"]
+kids_game(names)
 
 
-
-
-
-#     dict:
-# key will be all the words
-# values will be all the list of possibilites of what could come after them
-
-
-#####################################################################
+# ####################################################################
 # # You can ignore everything below this.
 
 # def print_dict(d):
