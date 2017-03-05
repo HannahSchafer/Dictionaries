@@ -100,42 +100,46 @@ def word_length_sorted(words):
 
     word_dict = {}
 
-    #iterate over each words in the list 'words'
+    #iterate over each words in the list 'words'.
     for word in words:
         if len(word) in word_dict.keys():
             word_dict[len(word)].append(word)
+            word_dict[len(word)].sort()
         else:    
-            word_dict[len(word)] = [word]     
+            word_dict[len(word)] = [word]  
+
+    # sorts the overall dictionary by word length
+    sorted_dict = sorted(word_dict.items())   
         
-    return word_dict.items()
+    return sorted_dict
 
 
-# def translate_to_pirate_talk(phrase):
-#     """Translate phrase to pirate talk.
+def translate_to_pirate_talk(phrase):
+    """Translate phrase to pirate talk.
 
-#     Given a phrase, translate each word to the Pirate-speak
-#     equivalent. Words that cannot be translated into Pirate-speak
-#     should pass through unchanged. Return the resulting sentence.
+    Given a phrase, translate each word to the Pirate-speak
+    equivalent. Words that cannot be translated into Pirate-speak
+    should pass through unchanged. Return the resulting sentence.
 
-#     Here's a table of English to Pirate translations:
+    Here's a table of English to Pirate translations:
 
-#     ----------  ----------------
-#     English     Pirate
-#     ----------  ----------------
-#     sir         matey
-#     hotel       fleabag inn
-#     student     swabbie
-#     man         matey
-#     professor   foul blaggart
-#     restaurant  galley
-#     your        yer
-#     excuse      arr
-#     students    swabbies
-#     are         be
-#     restroom    head
-#     my          me
-#     is          be
-#     ----------  ----------------
+    ----------  ----------------
+    English     Pirate
+    ----------  ----------------
+    sir         matey
+    hotel       fleabag inn
+    student     swabbie
+    man         matey
+    professor   foul blaggart
+    restaurant  galley
+    your        yer
+    excuse      arr
+    students    swabbies
+    are         be
+    restroom    head
+    my          me
+    is          be
+    ----------  ----------------
 
 #     For example::
 
