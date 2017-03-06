@@ -33,10 +33,6 @@ def count_words(phrase):
     word_count = {} 
 
     # for loop goes through each word, adding the word itself as the key
-    # making the value of the word default to 0, plus 1 for first time the loop
-    # comes across the word, otherwise, the .get method returns the value
-    # of the word if it's already there, and adds 1 each time the loop comes 
-    # across the word in the phrase.
     for word in words:
         word_count[word] = word_count.get(word, 0) + 1
     
@@ -182,82 +178,84 @@ def translate_to_pirate_talk(phrase):
     return translation
 
 
-# def kids_game(names):
-#     """Play a kids' word chain game.
+def kids_game(names):
+    """Play a kids' word chain game.
 
-#     Given a list of names, like::
+    Given a list of names, like::
 
-#       bagon baltoy yamask starly nosepass kalob nicky
+      bagon baltoy yamask starly nosepass kalob nicky
 
-#     Do the following:
+    Do the following:
 
-#     1. Always start with the first word ("bagon", in this example).
+    1. Always start with the first word ("bagon", in this example).
 
-#     2. Add it to the results.
+    2. Add it to the results.
 
-#     3. Use the last letter of that word to look for the next word.
-#        Since "bagon" ends with n, find the *first* word starting
-#        with "n" in our list --- in this case, "nosepass".
+    3. Use the last letter of that word to look for the next word.
+       Since "bagon" ends with n, find the *first* word starting
+       with "n" in our list --- in this case, "nosepass".
 
-#     4. Add "nosepass" to the results, and continue. Once a word has
-#        been used, it can't be used again --- so we'll never get to
-#        use "bagon" or "nosepass" a second time.
+    4. Add "nosepass" to the results, and continue. Once a word has
+       been used, it can't be used again --- so we'll never get to
+       use "bagon" or "nosepass" a second time.
 
-#     5. When you can't find an unused word to use, you're done!
-#        Return the list of output words.
+    5. When you can't find an unused word to use, you're done!
+       Return the list of output words.
 
-#     For example::
+    For example::
 
-#         >>> kids_game(["bagon", "baltoy", "yamask", "starly",
-#         ...            "nosepass", "kalob", "nicky", "booger"])
-#         ['bagon', 'nosepass', 'starly', 'yamask', 'kalob', 'baltoy']
+        >>> kids_game(["bagon", "baltoy", "yamask", "starly",
+        ...            "nosepass", "kalob", "nicky", "booger"])
+        ['bagon', 'nosepass', 'starly', 'yamask', 'kalob', 'baltoy']
 
-#     (After "baltoy", there are no more y-words, so we end, even
-#     though "nicky" and "booger" weren't used.)
+    (After "baltoy", there are no more y-words, so we end, even
+    though "nicky" and "booger" weren't used.)
 
-#     Two more examples:
+    Two more examples:
 
-#         >>> kids_game(["apple", "berry", "cherry"])
-#         ['apple']
+        >>> kids_game(["apple", "berry", "cherry"])
+        ['apple']
 
-#         >>> kids_game(["noon", "naan", "nun"])
-#         ['noon', 'naan', 'nun']
+        >>> kids_game(["noon", "naan", "nun"])
+        ['noon', 'naan', 'nun']
 
-#     This is a tricky problem. In particular, think about how using
-#     a dictionary (with the super-fast lookup they provide) can help;
-#     good solutions here will definitely require a dictionary.
-#     """
+    This is a tricky problem. In particular, think about how using
+    a dictionary (with the super-fast lookup they provide) can help;
+    good solutions here will definitely require a dictionary.
+    """
 
-#     # make empty list for game output 
-#     game_output = []
-#     # make empty dictionary to hold keys and values
-#     game_dict = {}
+    # make empty list for game output 
+    game_output = []
 
-#     # adding all words to dictionary as keys
-#     for word in names:
-#         game_dict[word] = None
+    # add first word to the game output list
+    game_output.append(names[0])
 
-#     # Adding values to dictionary keys. Only the first value that matches can be 
-#     # added, since the key word can be used only once.
-#     for word in names:
-#         for key in game_dict.keys():
-#             if game_dict[key] == None and key[-1] == word[0]:
-#                 game_dict[key] = word
-               
+    # make empty dictionary to hold keys and values
+    game_dict = {}
 
-#     # add first word to the game output list
-#     first_name = names[0]
-#     game_output.append(first_name)
+    # adding all words to dictionary as keys
+    for word in names:
+        game_dict[word] = 'X'
 
-#     # adding words to the final output
-#     index = 0
-#     while True:
-#         if game_dict[game_output[index]] == None:
-#             break
-#         else: 
-#             game_output.append(game_dict[game_output[index]])
-#             index += 1
-#     return game_output
+    # adding values to dictionary keys. values are possibilities of what can
+    # follow the key word 
+    
+    for key in game_dict.keys():
+        for word in names:
+            if (key[-1] == word[0]) and (game_dict[key] == 'X'):
+                game_dict[key] = word
+
+    # looping through dictionary to add values to game_output list
+    index = 0
+    while True:
+        if game_dict[game_output[index]] == 'X':
+            break
+        else: 
+            game_output.append(game_dict[game_output[index]])
+            index += 1
+
+    return game_output
+
 
 
 ####################################################################
